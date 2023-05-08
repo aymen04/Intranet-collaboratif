@@ -1,0 +1,16 @@
+main , main.pro{
+    text-align: center;
+
+}
+
+div{
+    display: inline-grid;
+    gap: 0.5em;
+}
+main.pro{
+    margin-top: 10%;
+}
+
+body{
+    background-color:#df6228;
+}
