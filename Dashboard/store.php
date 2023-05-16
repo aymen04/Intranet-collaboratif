@@ -126,7 +126,7 @@
             
             <td>Companies</td>
             <td>Project category</td>
-			<td>details</td>
+			<td>Details</td>
             <td>Delete</td>
             
             

@@ -39,10 +39,13 @@ body.dark {
 	--light: #0C0C1E;
 	--grey: #060714;
 	--dark: #FBFBFB;
+	color: white;
 }
 
+
+
 body {
-	background: var(--grey);
+	background: var(--grey); 
 	overflow-x: hidden;
 }
 
@@ -601,3 +604,9 @@ input.delete{
     background: gray;
     color: white;
 }
+
+.table-container ::before {
+	background-color: #000;
+	color: #fff;
+  }
+

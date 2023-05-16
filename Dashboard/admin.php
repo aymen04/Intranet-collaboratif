@@ -16,12 +16,12 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'Admin') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="admin.css" rel="stylesheet">
+    <link href="./admin.css" rel="stylesheet">
     <title>Admin</title> 
 </head>
 <body>
 
-    
+    <a href="index.php"">Revenir</a>
 
 <main>
 <h1>Ajouter un membre</h1>
@@ -30,20 +30,20 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'Admin') {
        
     <div>
            
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" pattern=".{3,10}" require>
+            <label for="name">Nom:</label>
+            <input type="text" name="name" id="name" pattern=".{3,10}" required>
        
             <label for="email">Email:</label>
             <input type="email" name="email" id="email">
         
-            <label for="mdp">Password:</label>
-            <input type="password" name="mdp" id="mdp" pattern=".{3,10}" require>
+            <label for="mdp">Mot de passe:</label>
+            <input type="password" name="mdp" id="mdp" pattern=".{3,10}" required>
        
-            <label for="mdp2">Password Confirmation:</label>
-            <input type="password" name="mdp2" id="mdp2" pattern=".{3,10}" require>
+            <label for="mdp2">Confirmation mot de passe :</label>
+            <input type="password" name="mdp2" id="mdp2" pattern=".{3,10}" required>
         
         
-            <input type="submit" name="ajouter"></input>
+            <input type="submit" name="ajouter" value="ajouter"></input>
     </div>
 </main>
 </form>
@@ -68,6 +68,40 @@ if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'Admin') {
   <textarea name="details" required></textarea><br><br>
 
   <input type="submit" value="ajouter" name='addproject'>
+</form>
+</main>
+
+
+
+<main class="todo">
+<h1>Ajouter une tâche </h1>
+
+         <form action="admin.php" method="post" accept-charset="UTF-8">
+       
+         <label for="mission">Mission :</label>
+  <input type="text" name="mission" required><br><br>
+
+  <label for="detail">Plus :</label>
+  <textarea name="detail" required></textarea><br><br>
+
+  <input type="submit" value="ajouter" name='addtodo'>
+</form>
+</main>
+
+
+
+<main class="pres">
+<h1>Ajouter une prestation </h1>
+
+         <form action="admin.php" method="post" accept-charset="UTF-8">
+       
+         <label for="nom">Nom :</label>
+  <input type="text" name="nom" required><br><br>
+
+  <label for="prix">Prix :</label>
+  <input type="number" name="prix"  id ="prix" step="0.01" required></input><br><br>
+
+  <input type="submit" value="ajouter" name='addpres'>
 </form>
 </main>
 
@@ -122,6 +156,8 @@ if(isset($_POST['ajouter'])) {
     }
 }
 
+
+// ajouter un projet 
 if(isset($_POST['addproject'])) {
     $nom_entreprise = $_POST['nom_entreprise'];
     $categorie_projet = $_POST['categorie_projet'];
@@ -137,10 +173,39 @@ if(isset($_POST['addproject'])) {
 
 
 
+    // ajouter une tache 
+    if(isset($_POST['addtodo'])) {
+        $mission = $_POST['mission'];
+        $detail = $_POST['detail'];
+        if(empty($mission) || empty($detail)) {
+            echo "Veuillez remplir tous les champs.";
+        } else{ 
+            $dbh = new PDO('mysql:host=localhost:8889;dbname=team', 'root', 'root');
+            $stmt = $dbh->prepare("INSERT INTO a_faire (mission, detail, statut) VALUES (:mission, :detail, 'à faire' )");
+            $stmt->bindValue(':mission', $mission, PDO::PARAM_STR);
+            $stmt->bindValue(':detail', $detail, PDO::PARAM_STR);
+            $stmt->execute();
+            header('Location: tasks.php');
+        }
        
+    }
 
-    
-
+    // ajouter une prestation 
+    if(isset($_POST['addpres'])) {
+        $nom = $_POST['nom'];
+        $prix = $_POST['prix'];
+        if(empty($nom) || empty($prix)) {
+            echo "Veuillez remplir tous les champs.";
+        } else{ 
+            $dbh = new PDO('mysql:host=localhost:8889;dbname=team', 'root', 'root');
+            $stmt = $dbh->prepare("INSERT INTO prestations (nom, prix) VALUES (:nom, :prix)");
+            $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
+            $stmt->bindValue(':prix', $prix, PDO::PARAM_STR);
+            $stmt->execute();
+            header('Location: index.php');
+        }
+       
+    }
     
 
                   

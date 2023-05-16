@@ -100,10 +100,23 @@
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
 							<a class="active" href="#" style="color:#df6228">Tasks</a>
+							
+							
 						</li>
 					</ul>
 				</div>
 				
+			</div>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Todo</h3>
+						<i class='bx bx-search' ></i>
+                        <a href="./admin.php">
+						<i class='bx bx-plus'></i>
+                    </a>
 			</div>
 
             <?php
@@ -125,9 +138,9 @@ foreach ($dbh->query("SELECT * FROM a_faire") as $row) { ?>
     <div class="card">
     <div class="card-body">
         <h5 class="card-title"><?php echo $row['mission']; ?></h5>
-        <p class="card-text"><?php echo $row['détails']; ?></p>
+        <p class="card-text"><?php echo $row['detail']; ?></p>
         <p class="card-time"><?php echo $row['temps']; ?></p>
-        <form method="POST">
+        <form method="POST" class="form">
             <input type="hidden" name="ida" value="<?php echo $row['ida']; ?>">
             <label for="statut">Statut:</label>
             <select name="statut" id="statut">
@@ -177,12 +190,14 @@ foreach ($dbh->query("SELECT * FROM a_faire") as $row) { ?>
   margin-bottom: 20px;
   text-align: end;
 }
-form {
+form.form {
   flex-direction: column;
   align-items: center;
   font-family: Arial, sans-serif;
   bottom: 0;
   right: 0;
+  display: flow-root;
+ margin-left: 68%;
 }
 
 label {
@@ -199,7 +214,7 @@ select {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #df6228;
   border: none;
   color: white;
   padding: 10px;
@@ -213,24 +228,12 @@ button {
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #3c91e6;
 }
 
 
 
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script src="script.js"></script>

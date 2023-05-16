@@ -76,5 +76,15 @@ switchMode.addEventListener('change', function () {
 })
 
 
+switchMode.addEventListener('change', function () {
+  const cards = document.querySelectorAll('.card');
+  if (this.checked) {
+    document.body.classList.add('dark');
+    cards.forEach(card => card.classList.add('dark'));
+  } else {
+    document.body.classList.remove('dark');
+    cards.forEach(card => card.classList.remove('dark'));
+  }
+});
 
 
